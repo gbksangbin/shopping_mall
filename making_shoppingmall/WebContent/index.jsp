@@ -5,8 +5,15 @@
 <head>
 <meta charset="EUC-KR">
 <title>Insert title here</title>
-</head>
 <body>
-
+<%
+char a = '*';
+for (int i = 0; i <= 10; i++){
+	for(int j = 0; j <= i; j++){
+		%><a><%=a%></a><%
+	}
+	%><br/><%
+}
+ %>
 </body>
 </html>
