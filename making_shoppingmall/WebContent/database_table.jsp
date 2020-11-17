@@ -183,5 +183,46 @@ catch(Exception e)
 }  
 %>
 </table>
+<%
+try
+{  
+	//step1 load the driver class  
+	Class.forName("oracle.jdbc.driver.OracleDriver");  
+	  
+	//step2 create  the connection object  
+	Connection con=DriverManager.getConnection(  
+	"jdbc:oracle:thin:@localhost:1521:xe","SMC_USER","SMC_USER");  
+	  
+	//step3 create the statement object  
+	Statement stmt=con.createStatement();  
+	Statement stmt2=con.createStatement();  
+	  
+	//step4 execute query  
+	String query = 	" SELECT " +
+					" product.id as pro_id,product.price as pro_price,payment_history.order_count as pay_order_count " +
+					" FROM " +
+					" product,payment_history ";
+	ResultSet rs=stmt.executeQuery(query);
+	
+	while(rs.next()){int price=rs.getInt("pro_price");
+	int id=rs.getInt("pro_id");
+	int order_count = rs.getInt("pay_order_count");
+	String query2 = " UPDATE " +
+					" PAYMENT_HISTORY " +
+					" SET " +
+					" ORDER_PRICE = "+(price*order_count)+
+					" WHERE "+
+					" PAYMENT_HISTORY.PRODUCT_ID = "+ id;
+	stmt2.executeQuery(query2);
+	}
+		
+	con.close();  
+	  
+}
+catch(Exception e)
+{ 
+	System.out.println(e);
+}  
+%>
 </body>
 </html>
