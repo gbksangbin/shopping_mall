@@ -20,7 +20,7 @@ try
 	Statement select_stmt=con.createStatement();
 	Statement update_stmt=con.createStatement();  
 	
-	for(int i = 0; i < 100; i++){
+	for(int i = 1; i <= 100; i++){
 		int a = (int)(Math.random() * 100);
 		int a1 = (int)(Math.random() * 100);
 		int a2 = (int)(Math.random() * 100);
