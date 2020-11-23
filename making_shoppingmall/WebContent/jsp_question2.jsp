@@ -30,25 +30,30 @@ try
 	Connection con=DriverManager.getConnection(  
 	"jdbc:oracle:thin:@localhost:1521:xe","SMC_USER","SMC_USER");  
 	Statement stmt=con.createStatement();  
-	String query = "SELECT name, price, stock, description, origin FROM product";
-	ResultSet rs=stmt.executeQuery(query);  
+	String query = "SELECT name, price, stock, description, origin " + 
+					" FROM " +
+					" product " +
+					" where " + 
+					" 1 = 1 ";
 	
 	
-	if(moreThanPrice != null){
-		query += " WHERE PRICE >= " + moreThanPrice;
+	
+	if(moreThanPrice != null && moreThanPrice.length() !=0 ){
+		query += " AND PRICE >= " + moreThanPrice;
 	}
-	if(lessThanPrice !=null){
+	if(lessThanPrice !=null && lessThanPrice.length() !=0 ){
 		query += " AND PRICE <= " + lessThanPrice;
 	}
-	if(moreThanStock !=null){
+	if(moreThanStock !=null && moreThanStock.length() !=0 ){
 		query += " AND STOCK >= " + moreThanStock;
 	}
-	if(lessThanStock !=null){
+	if(lessThanStock !=null && lessThanStock.length() !=0 ){
 		query += " AND STOCK <= " + lessThanStock;
 	}
 	
 	
 	System.out.println(query);
+	ResultSet rs=stmt.executeQuery(query);  
 	while(rs.next()) {
 		%><tr><%
 			%><td><%=rs.getString("name")%></td><%
@@ -73,12 +78,12 @@ catch(Exception e)
 <p>가격</p>
 
 
-<input type="NUMBER" id="moreThanPrice" placeholder="이상 조건">-
-<input type="NUMBER" id="lessThanPrice" placeholder="이하 조건">
+<input type="text" id="moreThanPrice" placeholder="이상 조건">-
+<input type="text" id="lessThanPrice" placeholder="이하 조건">
 
 <p>재고</p>
-<input type="NUMBER" id="moreThanStock" placeholder="이상 조건">-
-<input type="NUMBER" id="lessThanStock" placeholder="이하 조건">
+<input type="text" id="moreThanStock" placeholder="이상 조건">-
+<input type="text" id="lessThanStock" placeholder="이하 조건">
 <input type="button" onclick="click_search()" value="search">
 
 <script>
@@ -92,8 +97,9 @@ catch(Exception e)
 	}
 	
 	function redirect_with_get_params(moreThanPrice,lessThanPrice,moreThanStock,lessThanStock) {
-		window.location.href = 'jsp_question2.jsp?moreThanPrice=' + moreThanPrice + '&lessThanPrice='+ 
-								lessThanPrice + '&moreThanStock='+ moreThanStock + '&lessThanStock='+ lessThanStock ;
+		window.location.href = "jsp_question2.jsp?moreThanPrice=" + moreThanPrice + 
+								"&lessThanPrice=" + lessThanPrice + "&moreThanStock=" + moreThanStock + 
+								"&lessThanStock=" + lessThanStock;
 	}
 </script>
 </body>
