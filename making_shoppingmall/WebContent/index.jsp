@@ -33,6 +33,9 @@
 		case "payment_create":
 			%><%@include file="section/payment_create.jsp"%><%
 			break;
+		case "category_create":
+			%><%@include file="section/category_create.jsp"%><%
+			break;
 		default:
 			%><pre>
 			이프로그램은 쇼핑을 관리해주는 프로그램입니다.
