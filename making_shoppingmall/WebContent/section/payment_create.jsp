@@ -68,7 +68,7 @@
 		</tr>
 		<tr>	
 			<td><p>주소</p></td>
-			<td><input type="number" name="address"></td>
+			<td><input type="text" name="address"></td>
 		</tr>
 		<tr>	
 			<td colspan="2">
